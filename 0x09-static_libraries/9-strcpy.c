@@ -1,30 +1,24 @@
+#include<stdio.h>
 #include "main.h"
 /**
- * _strcpy - copies a string
+ * _strcpy - update
  * @dest: value
  * @src: value
- *@n: value
- * Return: dest
+ * Return:not
  */
-
-char *_strcpy(char *dest, char *src, int n)
-
+char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int l = 0;
+	int x = 0;
 
-	i = 0;
-	while (i < n && src[i] != '\0')
+	while (*(src + l) != '\0')
 	{
-		dest[i] = src[i];
-		i++;
+		l++;
 	}
-
-	while (i < n)
+	for ( ; x < l ; x++)
 	{
-		dest[i] = '\0';
-		i++;
+		dest[x] = src[x];
 	}
-
+	dest[l] = '\0';
 	return (dest);
-
 }
