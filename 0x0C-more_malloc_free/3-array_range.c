@@ -1,3 +1,4 @@
+
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,7 +14,7 @@
 int *array_range(int min, int max)
 {
 	int *range;
-        unsigned int width;
+	unsigned int width;
 
 	if (max < min)
 		return (NULL);
@@ -21,12 +22,12 @@ int *array_range(int min, int max)
 	width = max - min;
 
 	range = malloc(sizeof(int) * (width + 1));
-
 	if (!range)
 		return (NULL);
+
 	do {
 		*range++ = min++;
 	} while (min <= max);
-m
+
 	return (range - width - 1);
 }
