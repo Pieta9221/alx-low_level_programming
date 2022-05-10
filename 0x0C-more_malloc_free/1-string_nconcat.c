@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
+
 /**
  * string_nconcat - concatenate two strings
  * @s1: the first string
@@ -15,15 +16,14 @@
  * to the first character of the new string.
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
-
 {
-	char *cat;	unsigned int s1_len = 0;
+	char *cat;
+	unsigned int s1_len = 0;
 	unsigned int s2_len = 0;
-	if (s1)
 
+	if (s1)
 	{
 		while (s1[s1_len])
-
 			++s1_len;
 	}
 
