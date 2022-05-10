@@ -42,7 +42,7 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 
 /**
 
- * _realloc - reallocate a memory block using malloc and free
+ * _realloc - reallocate a memory block using malloc and 
 
  * @ptr: a pointer to the memory previously allocated with a call to malloc
 
