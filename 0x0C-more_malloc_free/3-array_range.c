@@ -27,6 +27,6 @@ int *array_range(int min, int max)
 	do {
 		*range++ = min++;
 	} while (min <= max);
-
+m
 	return (range - width - 1);
 }
