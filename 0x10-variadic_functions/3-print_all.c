@@ -1,163 +1,113 @@
-#include <stdio.h>
-
-#include <stdarg.h>
-
-#include <stdlib.h>
-
 #include "variadic_functions.h"
 
-/**
-
- * print_char - print a character
-
- * @args: the va_list with the character to print as it's next element
-
- *
-
- * Return: the number of bytes printed
-
- */
-
-int print_char(va_list args)
-
-{
-
-	return (printf("%c", va_arg(args, int)));}
 
 /**
-
- * print_float - print a float
-
- * @args: the va_list with the float to print as it's next element
-
- *
-
- * Return: the number of bytes printed
-
- */
-
-int print_float(va_list args)
-
+* print_char - Prints a char.
+* @arg: A list of arguments pointing to
+* the character to be printed.
+*/
+void print_char(va_list arg)
 {
+char letter;
 
-	return (printf("%f", va_arg(args, double)));
+letter = va_arg(arg, int);
 
+printf("%c", letter);
 }
 
 /**
-
- * print_int - print an integer
-
- * @args: the va_list with the integer to print as it's next element
-
- *
-
- * Return: the number of bytes printed
-
- */
-
-int print_int(va_list args)
-
+* print_int - Prints an int.
+* @arg: A list of arguments pointing to
+* the integer to be printed.
+*/
+void print_int(va_list arg)
 {
+int num;
 
-	return (printf("%i", va_arg(args, int)));
+num = va_arg(arg, int);
 
+printf("%d", num);
+}
+
+
+/**
+* print_float - Prints a float.
+* @arg: A list of arguments pointing to
+* the float to be printed.
+*/
+void print_float(va_list arg)
+{
+float num;
+
+num = va_arg(arg, double);
+
+printf("%f", num);
+}
+
+
+
+/**
+* print_string - Prints a string.
+* @arg: A list of arguments pointing to
+* the string to be printed.
+*/
+void print_string(va_list arg)
+{
+char *str;
+
+str = va_arg(arg, char *);
+
+if (str == NULL)
+{
+printf("(nil)");
+return;
+}
+
+printf("%s", str);
 }
 
 /**
-
- * print_str - print a string
-
- * @args: the va_list with the string to print as it's next element
-
- *
-
- * Return: the number of bytes printed
-
- */
-
-int print_str(va_list args)
-
-{
-
-	const char *str = va_arg(args, const char *);
-
-	if (!str)
-
-		str = "(nil)";
-
-	return (printf("%s", str));
-
-}
-
-/**
-
- * print_all - print anything
-
- * @format: a format string listing the types of the proceeding arguments
-
- * @...: the values to print
-
- */
-
+*print_all - prints anything
+*@format: format of input
+*
+*Return: nothing
+*/
 void print_all(const char * const format, ...)
-
 {
+va_list args;
 
-	va_list args;
+int i = 0, j = 0;
 
-	print_fn_t fn_list[] = {
+char *separator = "";
 
-		{'c', print_char},
+printer_t funcs[] = {
+{"c", print_char},
+{"i", print_int},
+{"f", print_float},
+{"s", print_string}
+};
 
-		{'f', print_float},
+va_start(args, format);
 
-		{'i', print_int},
+while (format && (*(format + i)))
+{
+j = 0;
 
-		{'s', print_str},
+while (j < 4 && (*(format + i) != *(funcs[j].symbol)))
+j++;
 
-		{ 0,  NULL}
+if (j < 4)
+{
+printf("%s", separator);
+funcs[j].print(args);
+separator = ", ";
+}
 
-	};
+i++;
 
-	char *sep[] = {"", ", "};
+}
 
-	unsigned int bytes = 0, fn_index = 0, format_index = 0;
+printf("\n");
 
-	va_start(args, format);
-
-	while (format && format[format_index])
-
-	{
-
-		fn_index = 0;
-
-		while (fn_list[fn_index].format)
-
-		{
-
-			if (format[format_index] == fn_list[fn_index].format)
-
-			{
-
-				printf("%s", sep[bytes != 0]);
-
-				bytes += fn_list[fn_index].fn(args);
-
-				break;
-
-			}
-
-			++fn_index;
-
-		}
-
-		++format_index;
-
-	}
-
-	printf("\n");
-
-	va_end(args);
-
+va_end(args);
 }
