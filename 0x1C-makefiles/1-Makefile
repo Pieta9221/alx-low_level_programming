@@ -1,21 +1,5 @@
-# Makefile for holberton, version 0.1
-
-NAME = holberton
-
 CC = gcc
-#CFLAGS = -Wall -Werror -Wextra -pedantic
-OBJ = holberton.o main.o
-SRC = holberton.c main.c
+SRC = main.c school.c
 
-RM = rm -f
-
-all: $(SRC)
-	$(CC) $^ -o $(NAME)
-
-clean:
-	$(RM) $(NAME) $(TMPFILES)
-
-oclean:
-	$(RM) $(OBJ)
-
-fclean: clean oclean
+all:
+	$(CC) $(SRC) -o school
