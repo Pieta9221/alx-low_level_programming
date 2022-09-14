@@ -1,25 +1,9 @@
-# Makefile for holberton, version 0.2
-
-NAME = holberton
-
 CC = gcc
-SRC = holberton.c main.c
-OBJ = $(patsubst %.c, %.o, $(SRC))
-
-TMPFILES = *~
-
-RM = rm -f
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
 
 all: $(OBJ)
-	$(CC) $^ -o $(NAME)
-
-obj: $(SRC)
-	$(CC) $^
-
-clean:
-	$(RM) $(NAME) $(TMPFILES)
-
-oclean:
-	$(RM) $(OBJ)
-
-fclean: clean oclean
+	@echo "Compiling..."
+	@$(CC) $(OBJ) -o $(NAME)
+	@echo "Done."
